@@ -1,8 +1,22 @@
 import React, { useEffect, useRef, useState } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css"; // Import Leaflet CSS
+import { FormData } from "./types";
 
-const BusinessGeoLocationStep: React.FC = () => {
+interface Props {
+  formData: FormData;
+  handleGeoLocationChange: (geolocation : Record<string,number>) => void;
+  onNext: () => void;
+  onBack: () => void;
+}
+
+const BusinessGeoLocationStep: React.FC<Props> = ({
+  formData,
+  handleGeoLocationChange,
+  onNext,
+  onBack,
+}) => {
+  const isButtonDisabled = formData.geolocation.lat == 0
   const mapRef = useRef<HTMLDivElement | null>(null);
   const mapInstance = useRef<L.Map | null>(null);
   const markerRef = useRef<L.Marker | null>(null); // Ref to handle marker
@@ -17,7 +31,7 @@ const BusinessGeoLocationStep: React.FC = () => {
       mapInstance.current = L.map(mapRef.current).setView([51.505, -0.09], 13); // Initialize map
 
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        maxZoom: 19,
+        maxZoom: 25,
         attribution:
           '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       }).addTo(mapInstance.current);
@@ -55,6 +69,7 @@ const BusinessGeoLocationStep: React.FC = () => {
         (position) => {
           const { latitude, longitude } = position.coords;
           setCoordinates({ lat: latitude, lng: longitude });
+          handleGeoLocationChange({ lat: latitude, lng: longitude })
         },
         (error) => {
           console.error("Error getting location: ", error);
@@ -69,6 +84,7 @@ const BusinessGeoLocationStep: React.FC = () => {
   const handleMapClick = (e: L.LeafletMouseEvent) => {
     const { lat, lng } = e.latlng;
     setCoordinates({ lat, lng });
+    handleGeoLocationChange({ lat, lng });
   };
 
   useEffect(() => {
@@ -111,6 +127,21 @@ const BusinessGeoLocationStep: React.FC = () => {
               Locate Me
             </button>
           </div>
+        </div>
+
+        <div className="flex justify-between mt-4">
+          <button
+            onClick={onBack}
+            className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded"
+          >
+            Back
+          </button>
+          <button disabled={isButtonDisabled}
+            onClick={onNext}
+            className={`font-bold py-2 px-4 rounded text-white ${isButtonDisabled ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-700'}`}
+            >
+            Next
+          </button>
         </div>
       </div>
     </div>

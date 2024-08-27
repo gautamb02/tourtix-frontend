@@ -14,6 +14,7 @@ export interface FormData {
   pincode: string;
   state: string;
   country: string;
+  geolocation : Record<string, number>;
   phone: string;
   email: string;
   website: string;

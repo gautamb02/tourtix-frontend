@@ -10,7 +10,7 @@ import Navbar from "../../components/Navbar";
 import BusinessGeoLocationStep from "./BusinessGeoLocationStep";
 
 const OnboardingIndex: React.FC = () => {
-  const [currentStep, setCurrentStep] = useState(-1);
+  const [currentStep, setCurrentStep] = useState(0); // Initialize with the first step (Info)
   const [formData, setFormData] = useState<FormData>({
     businessName: "",
     category: "",
@@ -20,6 +20,7 @@ const OnboardingIndex: React.FC = () => {
     state: "",
     country: "",
     phone: "",
+    geolocation: {},
     email: "",
     website: "",
     description: "",
@@ -38,6 +39,11 @@ const OnboardingIndex: React.FC = () => {
     setFormData((prevData) => ({ ...prevData, photos }));
   };
 
+  const handleGeoLocationChange = (geolocation: Record<string, number>) => {
+    setFormData((prevData) => ({ ...prevData, geolocation }));
+    console.log(formData);
+  };
+
   const handleHoursChange = (hours: Record<string, Hours>) => {
     setFormData((prevData) => ({ ...prevData, hours }));
   };
@@ -52,10 +58,6 @@ const OnboardingIndex: React.FC = () => {
 
   const renderStep = () => {
     switch (currentStep) {
-      case -1:
-        return(
-          <BusinessGeoLocationStep/>
-        )
       case 0:
         return (
           <BusinessInfoStep
@@ -66,7 +68,7 @@ const OnboardingIndex: React.FC = () => {
         );
       case 1:
         return (
-          <BusinessAddressStep
+          <BusinessDescriptionStep
             formData={formData}
             handleInputChange={handleInputChange}
             onNext={handleNext}
@@ -75,7 +77,7 @@ const OnboardingIndex: React.FC = () => {
         );
       case 2:
         return (
-          <BusinessContactStep
+          <BusinessAddressStep
             formData={formData}
             handleInputChange={handleInputChange}
             onNext={handleNext}
@@ -84,18 +86,18 @@ const OnboardingIndex: React.FC = () => {
         );
       case 3:
         return (
-          <BusinessDescriptionStep
+          <BusinessGeoLocationStep
             formData={formData}
-            handleInputChange={handleInputChange}
-            onNext={handleNext}
             onBack={handleBack}
+            handleGeoLocationChange={handleGeoLocationChange}
+            onNext={handleNext}
           />
         );
       case 4:
         return (
-          <BusinessPhotosStep
-            photos={formData.photos}
-            handlePhotoChange={handlePhotoChange}
+          <BusinessContactStep
+            formData={formData}
+            handleInputChange={handleInputChange}
             onNext={handleNext}
             onBack={handleBack}
           />
@@ -105,6 +107,15 @@ const OnboardingIndex: React.FC = () => {
           <BusinessHoursStep
             hours={formData.hours}
             handleHoursChange={handleHoursChange}
+            onNext={handleNext}
+            onBack={handleBack}
+          />
+        );
+      case 6:
+        return (
+          <BusinessPhotosStep
+            photos={formData.photos}
+            handlePhotoChange={handlePhotoChange}
             onNext={handleNext}
             onBack={handleBack}
           />
