@@ -12,9 +12,9 @@ const LoginForm: React.FC = () => {
     e.preventDefault();
     axios.post(LOGIN_API, { email, password })
       .then(result => {
-        console.log(result);
+        console.log(result.data);
         // Redirect to the home page or any other page after successful login
-        navigate("/home");
+        navigate("/");
       })
       .catch(err => console.log(err));
   }
