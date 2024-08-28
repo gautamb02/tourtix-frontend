@@ -2,15 +2,15 @@ import React from 'react'
 
 interface Props{
     isButtonDisabled : boolean;
-    onNext :() =>void;
+    onSubmit :() =>void;
 }
 
-const SubmitButton :React.FC<Props>  = ({isButtonDisabled,onNext}) => {
+const SubmitButton :React.FC<Props>  = ({isButtonDisabled,onSubmit}) => {
   return (
     <div>
-      <button
+      <button type='submit'
               disabled={isButtonDisabled}
-              onClick={onNext}
+              onClick={onSubmit}
               className={`font-bold py-2 px-4 rounded text-white ${isButtonDisabled ? 'bg-gray-400 cursor-not-allowed' : 'bg-green-500 hover:bg-green-700'}`}
               >
               Complete

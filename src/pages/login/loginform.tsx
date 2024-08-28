@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from 'axios';
 import { Link ,useNavigate } from "react-router-dom";
 import { LOGIN_API } from '../../../constants';
+import { setLogged, setOnboard, setToken } from "../../utils/localStorage";
 
 const LoginForm: React.FC = () => {
   const [email, setEmail] = useState<string>('');
@@ -14,7 +15,18 @@ const LoginForm: React.FC = () => {
       .then(result => {
         console.log(result.data);
         // Redirect to the home page or any other page after successful login
-        navigate("/");
+        const res = result.data;
+
+        setLogged(true)
+        setOnboard(res.organization.onboarded)
+        setToken(res.token)
+
+        if(res.organization.onboarded){
+          navigate("/dashboard");
+        }else{
+          navigate("/onboard");
+        }
+      
       })
       .catch(err => console.log(err));
   }

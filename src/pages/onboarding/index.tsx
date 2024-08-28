@@ -6,12 +6,16 @@ import BusinessDescriptionStep from "./BusinessDescriptionStep";
 import BusinessPhotosStep from "./BusinessPhotosStep";
 import BusinessHoursStep from "./BusinessHoursStep";
 import { FormData, GeoLocationData, Hours, initialState } from "./types";
-import Navbar from "../../components/Navbar";
 import BusinessGeoLocationStep from "./BusinessGeoLocationStep";
+import axios from "axios";
+import { ONBOARD_API } from "../../../constants";
+import { getToken, setOnboard } from "../../utils/localStorage";
+import { useNavigate } from "react-router-dom";
 
 const OnboardingIndex: React.FC = () => {
   const [currentStep, setCurrentStep] = useState(0); // Initialize with the first step (Info)
   const [formData, setFormData] = useState<FormData>(initialState);
+  const navigate = useNavigate();
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -26,7 +30,6 @@ const OnboardingIndex: React.FC = () => {
 
   const handleGeoLocationChange = (geolocation: GeoLocationData) => {
     setFormData((prevData) => ({ ...prevData, geolocation }));
-   
   };
 
   const handleHoursChange = (hours: Record<string, Hours>) => {
@@ -40,6 +43,29 @@ const OnboardingIndex: React.FC = () => {
 
   const handleBack = () => {
     setCurrentStep((prevStep) => prevStep - 1);
+  };
+
+  const handleSubmit = () => {
+    
+    axios
+      .post(ONBOARD_API, formData, {
+        headers: {
+          'Content-Type': 'application/json', // Or 'application/json' if you're sending JSON
+          'Authorization': `Bearer ${getToken()}`, // Optional, if you need to send an authorization token
+          // Add other headers as needed
+        }
+      })
+      .then((result) => {
+        console.log(result.data);
+        // Redirect to the home page or any other page after successful login
+        const res = result.data;
+
+        if (res.success === 1) {
+          setOnboard(true);
+          navigate("/dashboard");
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
   const renderStep = () => {
@@ -102,7 +128,7 @@ const OnboardingIndex: React.FC = () => {
           <BusinessPhotosStep
             photos={formData.photos}
             handlePhotoChange={handlePhotoChange}
-            onNext={handleNext}
+            onSubmit={handleSubmit}
             onBack={handleBack}
           />
         );
@@ -122,11 +148,8 @@ const OnboardingIndex: React.FC = () => {
 
   return (
     <>
-      <Navbar />
       <div className="flex justify-center items-center min-h-[80vh]">
-        <div className="w-5/6 mx-auto my-8 bg-white">
-          {renderStep()}
-        </div>
+        <div className="w-5/6 mx-auto my-8 bg-white">{renderStep()}</div>
       </div>
     </>
   );

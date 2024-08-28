@@ -1,11 +1,13 @@
-import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import LandingPageIndex from './pages/landing'; // Adjust the path as necessary
 import NotFoundIndex from './pages/notfound';
-import Navbar from './components/Navbar';
 import OnboardingIndex from './pages/onboarding';
 import SignUpIndex from './pages/signup';
 import LogIn from './pages/login';
 import HomePage from './pages/home';
+import ProtectedRoute from './routes/ProtectedRoute';
+import Navbar from './components/navbar/Navbar';
+
 
 function App() {
   return (
@@ -16,22 +18,20 @@ function App() {
 }
 
 function Main() {
-  const location = useLocation();
-  const hideNavbar = location.pathname === '/onboard';
-
   return (
     <>
-      {!hideNavbar && <Navbar />}
+      <Navbar />
       <main>
-        <Routes>
-          <Route path="/" element={<LandingPageIndex />} />
-          <Route path="*" element={<NotFoundIndex />} /> {/* Catch-all route for 404 */}
-          <Route path="/onboard" element={<OnboardingIndex />} />
-          <Route path="/signup" element={<SignUpIndex/>} />
-          <Route path="/login" element={<LogIn/>} /> 
-          <Route path="/dashboard" element={<HomePage/>} /> 
-
-        </Routes>
+        <ProtectedRoute>
+          <Routes>
+            <Route path="/" element={<LandingPageIndex />} />
+            <Route path="*" element={<NotFoundIndex />} /> {/* Catch-all route for 404 */}
+            <Route path="/onboard" element={<OnboardingIndex />} />
+            <Route path="/signup" element={<SignUpIndex />} />
+            <Route path="/login" element={<LogIn />} />
+            <Route path="/dashboard" element={<HomePage />} />
+          </Routes>
+        </ProtectedRoute>
       </main>
     </>
   );
