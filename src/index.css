@@ -12,3 +12,5 @@
 body{
   font-family: var(--main-font);
 }
+
+#map { height: 200px; }
