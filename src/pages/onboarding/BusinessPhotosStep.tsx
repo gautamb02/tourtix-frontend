@@ -8,11 +8,11 @@ import { v4 as uuidv4 } from 'uuid'; // Import UUID for generating random unique
 interface Props {
   photos: string[];
   handlePhotoChange: (photos: string[]) => void;
-  onNext: () => void;
+  onSubmit: () => void;
   onBack: () => void;
 }
 
-const BusinessPhotosStep: React.FC<Props> = ({ photos, handlePhotoChange, onNext, onBack }) => {
+const BusinessPhotosStep: React.FC<Props> = ({ photos, handlePhotoChange, onSubmit, onBack }) => {
   const [dragging, setDragging] = useState(false);
   const [uploading, setUploading] = useState(false);
 
@@ -131,7 +131,7 @@ const BusinessPhotosStep: React.FC<Props> = ({ photos, handlePhotoChange, onNext
         </div>
         <div className="flex justify-between mt-4">
           <BackButton onBack={onBack} />
-          <SubmitButton isButtonDisabled={isButtonDisabled} onNext={onNext} />
+          <SubmitButton isButtonDisabled={isButtonDisabled} onSubmit={onSubmit} />
         </div>
       </div>
     </div>
