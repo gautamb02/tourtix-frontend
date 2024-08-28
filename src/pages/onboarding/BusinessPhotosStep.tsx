@@ -1,4 +1,9 @@
 import React, { useState } from 'react';
+import BackButton from '../../components/onboarding/BackButton';
+import SubmitButton from '../../components/onboarding/SubmitButton';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { storage } from '../../firebase.config';
+import { v4 as uuidv4 } from 'uuid'; // Import UUID for generating random unique strings
 
 interface Props {
   photos: string[];
@@ -9,11 +14,37 @@ interface Props {
 
 const BusinessPhotosStep: React.FC<Props> = ({ photos, handlePhotoChange, onNext, onBack }) => {
   const [dragging, setDragging] = useState(false);
+  const [uploading, setUploading] = useState(false);
 
   const handleFileChange = (files: FileList | null) => {
-    if (files) {
-      const newPhotos = Array.from(files).map(file => URL.createObjectURL(file));
-      handlePhotoChange([...photos, ...newPhotos]);
+    if (files && files.length > 0) {
+      const fileArray = Array.from(files);
+      handleMultipleUploads(fileArray);
+    }
+  };
+
+  const generateUniqueFileName = (originalName: string) => {
+    const extension = originalName.split('.').pop();
+    const uniqueName = `${uuidv4()}.${extension}`;
+    return uniqueName;
+  };
+
+  const handleMultipleUploads = async (files: File[]) => {
+    setUploading(true);
+    try {
+      const uploadPromises = files.map(async (file) => {
+        const uniqueFileName = generateUniqueFileName(file.name);
+        const storageRef = ref(storage, `images/${uniqueFileName}`);
+        await uploadBytes(storageRef, file);
+        return getDownloadURL(storageRef);
+      });
+
+      const urls = await Promise.all(uploadPromises);
+      handlePhotoChange([...photos, ...urls]);
+    } catch (error) {
+      console.error("Error uploading files:", error);
+    } finally {
+      setUploading(false);
     }
   };
 
@@ -44,7 +75,8 @@ const BusinessPhotosStep: React.FC<Props> = ({ photos, handlePhotoChange, onNext
     handlePhotoChange(photos.filter(p => p !== photo));
   };
 
-  const isButtonDisabled = photos.length === 0;
+  const isButtonDisabled = photos.length === 0 || uploading;
+
   return (
     <div className="flex justify-center">
       <div className="w-1/2 flex items-center justify-center">
@@ -52,7 +84,7 @@ const BusinessPhotosStep: React.FC<Props> = ({ photos, handlePhotoChange, onNext
       </div>
       <div className="p-4 w-1/2">
         <h2 className="text-xl font-bold mb-4">Business Photos</h2>
-        <div className="mb-4  rounded p-4">
+        <div className="mb-4 rounded p-4">
           <label
             htmlFor="dropzone-file"
             className={`flex flex-col items-center justify-center w-full h-36 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 ${dragging ? 'bg-gray-100' : ''}`}
@@ -86,7 +118,7 @@ const BusinessPhotosStep: React.FC<Props> = ({ photos, handlePhotoChange, onNext
                 />
                 <button
                   onClick={() => handleRemovePhoto(photo)}
-                  className="absolute top-1 right-1 bg-red-600 text-white  p-1 m-2 rounded-full hover:bg-red-800 focus:outline-none"
+                  className="absolute top-1 right-1 bg-red-600 text-white p-1 m-2 rounded-full hover:bg-red-800 focus:outline-none"
                   aria-label="Remove photo"
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -98,18 +130,8 @@ const BusinessPhotosStep: React.FC<Props> = ({ photos, handlePhotoChange, onNext
           </div>
         </div>
         <div className="flex justify-between mt-4">
-          <button
-            onClick={onBack}
-            className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded"
-          >
-            Back
-          </button>
-          <button disabled={isButtonDisabled}
-            onClick={onNext}
-            className={`font-bold py-2 px-4 rounded text-white ${isButtonDisabled ? 'bg-gray-400 cursor-not-allowed' : 'bg-green-600 hover:bg-green-700'}`}
-            >
-            Submit
-          </button>
+          <BackButton onBack={onBack} />
+          <SubmitButton isButtonDisabled={isButtonDisabled} onNext={onNext} />
         </div>
       </div>
     </div>

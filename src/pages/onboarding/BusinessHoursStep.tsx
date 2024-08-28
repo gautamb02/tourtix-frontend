@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { Hours } from "./types";
+import { days, Hours } from "./types";
+import BackButton from "../../components/onboarding/BackButton";
+import NextButton from "../../components/onboarding/NextButton";
 
 interface Props {
   hours: Record<string, Hours>;
@@ -14,15 +16,7 @@ const BusinessHoursStep: React.FC<Props> = ({
   onNext,
   onBack,
 }) => {
-  const days = [
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Sunday",
-  ];
+  
 
   const [isButtonDisabled, setButtonDisabled] = useState(false);
 
@@ -128,19 +122,8 @@ const BusinessHoursStep: React.FC<Props> = ({
           );
         })}
         <div className="flex justify-between mt-4">
-          <button
-            onClick={onBack}
-            className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded"
-          >
-            Back
-          </button>
-          <button
-            onClick={onNext}
-            className={`font-bold py-2 px-4 rounded text-white ${isButtonDisabled ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-700'}`}
-            disabled={isButtonDisabled}
-          >
-            Next
-          </button>
+        <BackButton onBack={onBack}/>
+        <NextButton isButtonDisabled={isButtonDisabled} onNext={onNext}/>
         </div>
       </div>
     </div>

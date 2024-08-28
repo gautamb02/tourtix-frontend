@@ -1,5 +1,6 @@
 import React from "react";
 import { FormData } from "./types";
+import NextButton from "../../components/onboarding/NextButton";
 
 interface Props {
   formData: FormData;
@@ -41,13 +42,7 @@ const BusinessInfoStep: React.FC<Props> = ({
             className="w-full p-2 mb-2 border rounded"
           />
           <div className="flex justify-end mt-4">
-            <button
-              disabled={isButtonDisabled}
-              onClick={onNext}
-              className={`font-bold py-2 px-4 rounded text-white ${isButtonDisabled ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-700'}`}
-              >
-              Next
-            </button>
+            <NextButton isButtonDisabled={isButtonDisabled} onNext={onNext}/>
           </div>
         </div>
       </div>

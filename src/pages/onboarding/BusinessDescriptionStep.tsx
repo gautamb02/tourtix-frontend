@@ -1,5 +1,7 @@
 import React from "react";
 import { FormData } from "./types";
+import NextButton from "../../components/onboarding/NextButton";
+import BackButton from "../../components/onboarding/BackButton";
 
 interface Props {
   formData: FormData;
@@ -15,7 +17,7 @@ const BusinessDescriptionStep: React.FC<Props> = ({
   onBack,
 }) => {
   const cleanedDescription = formData.description.trim().replace(/\s+/g, ' ');
-  const MIN_DESCRIPTION_LENGTH = 20;
+  const MIN_DESCRIPTION_LENGTH = 750;
   const CURRENT_DESCRIPTION_LENGTH = cleanedDescription.length;
   const isButtonDisabled = CURRENT_DESCRIPTION_LENGTH < MIN_DESCRIPTION_LENGTH;
 
@@ -31,26 +33,15 @@ const BusinessDescriptionStep: React.FC<Props> = ({
           value={formData.description}
           onChange={handleInputChange}
           placeholder="Describe your business..."
-          className="w-full p-2 mb-2 border rounded resize-none"
-          style={{ height: "400px" }} 
+          className="w-full p-5 mb-2 text-justify border focus:border-none rounded resize-none"
+          style={{ height: "350px" }} 
         />
         <div className={`text-right text-sm text-gray-600`}>
-          {CURRENT_DESCRIPTION_LENGTH}/{MIN_DESCRIPTION_LENGTH} characters
+          {CURRENT_DESCRIPTION_LENGTH}/{MIN_DESCRIPTION_LENGTH}
         </div>
         <div className="flex justify-between mt-4">
-          <button
-            onClick={onBack}
-            className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded"
-          >
-            Back
-          </button>
-          <button
-            onClick={onNext}
-            className={`font-bold py-2 px-4 rounded text-white ${isButtonDisabled ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-700'}`}
-            disabled={isButtonDisabled}
-          >
-            Next
-          </button>
+         <BackButton onBack={onBack}/>
+          <NextButton isButtonDisabled={isButtonDisabled} onNext={onNext}/>
         </div>
       </div>
     </div>

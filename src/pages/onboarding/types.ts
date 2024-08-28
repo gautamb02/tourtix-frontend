@@ -6,6 +6,21 @@ export interface Hours {
     end_time: string;
   };
 }
+
+export const days = [
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+  "Sunday",
+];
+
+export interface GeoLocationData{
+  lat : number;
+  lng : number;
+}
 export interface FormData {
   businessName: string;
   category: string;
@@ -14,7 +29,7 @@ export interface FormData {
   pincode: string;
   state: string;
   country: string;
-  geolocation : Record<string, number>;
+  geolocation : GeoLocationData;
   phone: string;
   email: string;
   website: string;
@@ -22,6 +37,31 @@ export interface FormData {
   description: string;
   photos: string[];
 }
+
+export const initialState: FormData = {
+  businessName: "",
+  category: "",
+  address: "",
+  city: "",
+  pincode: "",
+  state: "",
+  country: "",
+  geolocation: {
+    lat: 0,
+    lng: 0,
+  },
+  phone: "",
+  email: "",
+  website: "",
+  hours: days.reduce((acc, day) => {
+    acc[day] = { open: false };
+    return acc;
+  }, {} as Record<string, Hours>),
+  description: "",
+  photos: [],
+};
+
+
 
 export const categories = [
   "Art Museums",

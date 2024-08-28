@@ -5,28 +5,13 @@ import BusinessContactStep from "./BusinessContactStep";
 import BusinessDescriptionStep from "./BusinessDescriptionStep";
 import BusinessPhotosStep from "./BusinessPhotosStep";
 import BusinessHoursStep from "./BusinessHoursStep";
-import { FormData, Hours } from "./types";
+import { FormData, GeoLocationData, Hours, initialState } from "./types";
 import Navbar from "../../components/Navbar";
 import BusinessGeoLocationStep from "./BusinessGeoLocationStep";
 
 const OnboardingIndex: React.FC = () => {
   const [currentStep, setCurrentStep] = useState(0); // Initialize with the first step (Info)
-  const [formData, setFormData] = useState<FormData>({
-    businessName: "",
-    category: "",
-    address: "",
-    city: "",
-    pincode: "",
-    state: "",
-    country: "",
-    phone: "",
-    geolocation: {},
-    email: "",
-    website: "",
-    description: "",
-    photos: [],
-    hours: {},
-  });
+  const [formData, setFormData] = useState<FormData>(initialState);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -39,9 +24,9 @@ const OnboardingIndex: React.FC = () => {
     setFormData((prevData) => ({ ...prevData, photos }));
   };
 
-  const handleGeoLocationChange = (geolocation: Record<string, number>) => {
+  const handleGeoLocationChange = (geolocation: GeoLocationData) => {
     setFormData((prevData) => ({ ...prevData, geolocation }));
-    console.log(formData);
+   
   };
 
   const handleHoursChange = (hours: Record<string, Hours>) => {
@@ -50,6 +35,7 @@ const OnboardingIndex: React.FC = () => {
 
   const handleNext = () => {
     setCurrentStep((prevStep) => prevStep + 1);
+    console.log(formData);
   };
 
   const handleBack = () => {

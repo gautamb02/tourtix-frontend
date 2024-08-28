@@ -1,6 +1,8 @@
 // BusinessContactStep.tsx
 import React from "react";
 import { FormData } from "./types";
+import BackButton from "../../components/onboarding/BackButton";
+import NextButton from "../../components/onboarding/NextButton";
 
 interface Props {
   formData: FormData;
@@ -49,18 +51,8 @@ const BusinessContactStep: React.FC<Props> = ({
         className="w-full p-2 mb-2 border rounded"
       />
       <div className="flex justify-between mt-4">
-        <button
-          onClick={onBack}
-          className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded"
-        >
-          Back
-        </button>
-        <button disabled={isButtonDisabled}
-          onClick={onNext}
-          className={`font-bold py-2 px-4 rounded text-white ${isButtonDisabled ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-700'}`}
-             >
-          Next
-        </button>
+      <BackButton onBack={onBack}/>
+      <NextButton isButtonDisabled={isButtonDisabled} onNext={onNext}/>
       </div>
     </div>
   </div>
