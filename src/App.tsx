@@ -5,6 +5,7 @@ import Navbar from './components/Navbar';
 import OnboardingIndex from './pages/onboarding';
 import SignUpIndex from './pages/signup';
 import LogIn from './pages/login';
+import HomePage from './pages/home';
 
 function App() {
   return (
@@ -25,9 +26,11 @@ function Main() {
         <Routes>
           <Route path="/" element={<LandingPageIndex />} />
           <Route path="*" element={<NotFoundIndex />} /> {/* Catch-all route for 404 */}
-          <Route path="/onboard" element={<OnboardingIndex />} /> 
+          <Route path="/onboard" element={<OnboardingIndex />} />
           <Route path="/signup" element={<SignUpIndex/>} />
           <Route path="/login" element={<LogIn/>} /> 
+          <Route path="/dashboard" element={<HomePage/>} /> 
+
         </Routes>
       </main>
     </>
