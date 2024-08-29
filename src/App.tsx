@@ -7,6 +7,7 @@ import LogIn from './pages/login';
 import HomePage from './pages/home';
 import ProtectedRoute from './routes/ProtectedRoute';
 import Navbar from './components/navbar/Navbar';
+import AboutPage from './pages/about';
 
 
 function App() {
@@ -30,6 +31,7 @@ function Main() {
             <Route path="/signup" element={<SignUpIndex />} />
             <Route path="/login" element={<LogIn />} />
             <Route path="/dashboard" element={<HomePage />} />
+            <Route path="/about" element={<AboutPage />} />
           </Routes>
         </ProtectedRoute>
       </main>
