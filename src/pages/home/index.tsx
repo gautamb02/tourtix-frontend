@@ -1,11 +1,16 @@
-import Dashboard from './dasboard';
+// import Dashboard from './dasboard';
+import Profile from './profile';
 
-const index = () => {
+const DashboardIndex = () => {
   return (
     <div>
-      <Dashboard/>
+      {/* <Dashboard/> */}
+      <Profile/>
     </div>
   );
 }
 
-export default index;
+
+
+
+export default DashboardIndex;

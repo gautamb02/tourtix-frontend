@@ -4,9 +4,9 @@ import NotFoundIndex from './pages/notfound';
 import OnboardingIndex from './pages/onboarding';
 import SignUpIndex from './pages/signup';
 import LogIn from './pages/login';
-import HomePage from './pages/home';
 import ProtectedRoute from './routes/ProtectedRoute';
 import Navbar from './components/navbar/Navbar';
+import DashboardIndex from './pages/home';
 
 
 function App() {
@@ -29,7 +29,7 @@ function Main() {
             <Route path="/onboard" element={<OnboardingIndex />} />
             <Route path="/signup" element={<SignUpIndex />} />
             <Route path="/login" element={<LogIn />} />
-            <Route path="/dashboard" element={<HomePage/>} />
+            <Route path="/dashboard" element={<DashboardIndex/>} />
           </Routes>
         </ProtectedRoute>
       </main>
