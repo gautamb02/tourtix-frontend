@@ -11,3 +11,4 @@ export const GET_BUSINESS_API = `${API_BASE_URL}/api/business/getbusiness`;
 export const LOCAL_ONBOARD = "onboard"
 export const LOCAL_LOGGED = "logged"
 export const LOCAL_TOKEN = "token"
+export const LOCAL_BUSINESS_DATA = 'businessProfileData';

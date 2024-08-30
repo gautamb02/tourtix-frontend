@@ -1,4 +1,4 @@
-import { LOCAL_LOGGED, LOCAL_ONBOARD, LOCAL_TOKEN } from "../../constants";
+import { LOCAL_BUSINESS_DATA, LOCAL_LOGGED, LOCAL_ONBOARD, LOCAL_TOKEN } from "../../constants";
 
 // Helper function to convert a boolean to a string
 function booleanToString(value: boolean): string {
@@ -25,6 +25,10 @@ export function getToken(): string | null {
     return localStorage.getItem(LOCAL_TOKEN);
 }
 
+export function getLocalBusinessData(): string | null {
+    return localStorage.getItem(LOCAL_BUSINESS_DATA);
+}
+
 // Setter functions
 export function setOnboard(value: boolean): void {
     localStorage.setItem(LOCAL_ONBOARD, booleanToString(value));
@@ -36,6 +40,10 @@ export function setLogged(value: boolean): void {
 
 export function setToken(value: string): void {
     localStorage.setItem(LOCAL_TOKEN, value);
+}
+
+export function setLocalBusinessData(value: string): void {
+    localStorage.setItem(LOCAL_BUSINESS_DATA, value);
 }
 
 // Optional: remove functions if you need to clear these items from localStorage
@@ -51,9 +59,14 @@ export function removeToken(): void {
     localStorage.removeItem(LOCAL_TOKEN);
 }
 
+export function removeBusinessData(): void {
+    localStorage.removeItem(LOCAL_BUSINESS_DATA);
+}
+
 
 export function clearUserData():void{
     removeLogged()
     removeOnboard()
     removeToken()
+    removeBusinessData()
 }
