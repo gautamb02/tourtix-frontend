@@ -29,7 +29,7 @@ function Main() {
             <Route path="/onboard" element={<OnboardingIndex />} />
             <Route path="/signup" element={<SignUpIndex />} />
             <Route path="/login" element={<LogIn />} />
-            <Route path="/dashboard" element={<HomePage />} />
+            <Route path="/dashboard" element={<HomePage/>} />
           </Routes>
         </ProtectedRoute>
       </main>
