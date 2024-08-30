@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { GET_BUSINESS_API, LOCAL_BUSINESS_DATA } from '../../../constants';
+import { GET_BUSINESS_API } from '../../../constants';
 import { setLocalBusinessData, getLocalBusinessData, getToken } from '../../utils/localStorage';
 import { BusinessData } from './types';
 
