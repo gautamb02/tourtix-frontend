@@ -1,11 +1,9 @@
-// import Dashboard from './dasboard';
-import Profile from './profile';
+import Profile from "./profile";
 
 const DashboardIndex = () => {
   return (
     <div>
-      {/* <Dashboard/> */}
-      <Profile/>
+     <Profile/>
     </div>
   );
 }

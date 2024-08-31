@@ -8,6 +8,7 @@ import ProtectedRoute from './routes/ProtectedRoute';
 import Navbar from './components/navbar/Navbar';
 import DashboardIndex from './pages/home';
 import AboutPage from './pages/about';
+import ActivityIndex from './pages/activity';
 
 
 function App() {
@@ -32,6 +33,7 @@ function Main() {
             <Route path="/login" element={<LogIn />} />
             <Route path="/dashboard" element={<DashboardIndex/>} />
             <Route path="/about" element={<AboutPage/>} />
+            <Route path="/activity" element={<ActivityIndex/>} />
           </Routes>
         </ProtectedRoute>
       </main>

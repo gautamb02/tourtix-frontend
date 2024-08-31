@@ -16,6 +16,8 @@ const Navbar: React.FC = () => {
         <div className="hidden md:flex space-x-4">
           <Link to="/" className="text-black hover:text-gray-300">Home</Link>
           <Link to="/about" className="text-black hover:text-gray-300">About</Link>
+          <Link to="/dashboard" className="text-black hover:text-gray-300">Dashboard</Link>
+          <Link to="/activity" className="text-black hover:text-gray-300">Activity</Link>
           <Logout /> 
           {/* Add more links as needed */}
         </div>
@@ -48,6 +50,18 @@ const Navbar: React.FC = () => {
             onClick={toggleMenu}
           >
             About
+          </Link><Link
+            to="/dashboard"
+            className="text-black py-2 px-4  w-full text-center"
+            onClick={toggleMenu}
+          >
+            Dashboard
+          </Link> <Link
+            to="/activity"
+            className="text-black py-2 px-4  w-full text-center"
+            onClick={toggleMenu}
+          >
+            Activity
           </Link>
           <Logout /> 
           {/* Add more links as needed */}

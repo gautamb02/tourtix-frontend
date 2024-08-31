@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { GET_BUSINESS_API } from '../../../constants';
-import { setLocalBusinessData, getLocalBusinessData, getToken } from '../../utils/localStorage';
+import { setLocalBusinessData, getLocalBusinessData, getToken, getLocalBusinessId, setLocalBusinessId } from '../../utils/localStorage';
 import { BusinessData } from './types';
 
 
@@ -16,6 +16,8 @@ const Profile: React.FC = () => {
         // First, try to get data from local storage
         const storedData = getLocalBusinessData()
         if (storedData) {
+
+          console.log(getLocalBusinessId())
           setBusinessData(JSON.parse(storedData));
           setLoading(false);
           return;
@@ -33,6 +35,7 @@ const Profile: React.FC = () => {
           const fetchedData = response.data.business;
           setBusinessData(fetchedData);
           setLocalBusinessData(JSON.stringify(fetchedData))
+          setLocalBusinessId(fetchedData['_id'])
         } else {
           setError('Failed to fetch business data');
         }
