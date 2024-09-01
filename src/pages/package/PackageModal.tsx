@@ -17,7 +17,7 @@ if (!isOpen) return null;
     <div className="fixed inset-0 w-full flex items-center justify-center bg-black bg-opacity-50">
       <div className="bg-white p-4 rounded shadow-lg relative mx-auto w-5/6  h-auto max-h-[90vh] overflow-auto">
         <div className="flex items-center   justify-between">
-          <h1 className="text-3xl font-bold text-gray-800">Create a Package</h1>
+          <h1 className="text-3xl font-bold text-gray-800">Create/Update Package</h1>
           <button
             onClick={onClose}
             className=" text-gray-600 hover:text-gray-900"

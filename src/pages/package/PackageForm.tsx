@@ -1,31 +1,53 @@
-import React, { useState } from 'react';
-import { ActivityState, initPackageFormData, PackageFormData } from './types';
-import { getLocalBusinessId, getToken } from '../../utils/localStorage';
-import { ADD_PKG_API } from '../../../constants';
+import React, { useEffect, useState } from "react";
+import {
+  ActivityState,
+  initPackageFormData,
+  Package,
+  PackageFormData,
+} from "./types";
+import { getLocalBusinessId, getToken } from "../../utils/localStorage";
+import { ADD_PKG_API, UPDATE_PKG_API } from "../../../constants";
 
 interface Props {
   activitiesServer: ActivityState[];
+  packageToUpdate: Package | null;
+  fetchPackages: () => void;
 }
 
-const PackageForm: React.FC<Props> = ({ activitiesServer }) => {
-  const [formData, setFormData] = useState<PackageFormData>({
-    businessId: '',
-    name: '',
-    activities: [],
-    adultPrice: 0,
-    childPrice: 0,
-    description: '',
-    isActive: true,
-  });
+const PackageForm: React.FC<Props> = ({
+  activitiesServer,
+  packageToUpdate = null,
+  fetchPackages,
+}) => {
+  let currBId = getLocalBusinessId();
+  const [formData, setFormData] = useState<PackageFormData>(initPackageFormData);
+
+  useEffect(() => {
+    if (packageToUpdate) {
+      setFormData({
+        businessId: packageToUpdate.businessId,
+        name: packageToUpdate.name,
+        activities: packageToUpdate.activities.map((activity) => activity._id), // Map to activity IDs
+        adultPrice: packageToUpdate.adultPrice,
+        childPrice: packageToUpdate.childPrice,
+        description: packageToUpdate.description,
+        isActive: packageToUpdate.isActive,
+      });
+    } else {
+      setFormData(initPackageFormData);
+    }
+  }, [packageToUpdate]);
 
   // Handle changes to form fields
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => {
     const { name, value, type, checked } = e.target as HTMLInputElement;
 
-    if (type === 'checkbox') {
-      if (name === 'isActive') {
+    if (type === "checkbox") {
+      if (name === "isActive") {
         setFormData({
           ...formData,
           [name]: checked,
@@ -35,13 +57,13 @@ const PackageForm: React.FC<Props> = ({ activitiesServer }) => {
           ...formData,
           activities: checked
             ? [...formData.activities, value]
-            : formData.activities.filter(activityId => activityId !== value),
+            : formData.activities.filter((activityId) => activityId !== value),
         });
       }
     } else {
       let fieldValue: string | number | boolean = value;
 
-      if (type === 'number') {
+      if (type === "number") {
         fieldValue = Number(value);
       }
 
@@ -58,34 +80,53 @@ const PackageForm: React.FC<Props> = ({ activitiesServer }) => {
     setFormData({
       ...formData,
       activities: isChecked
-        ? formData.activities.filter(id => id !== activityId)
+        ? formData.activities.filter((id) => id !== activityId)
         : [...formData.activities, activityId],
     });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     if (!(formData.activities.length > 0)) {
       alert("Kindly select one or more activities");
       return;
     }
-    setFormData({ ...formData, businessId: getLocalBusinessId() });
+
+    // Ensure businessId is set before submitting
+    let businessId = currBId;
+    if (!businessId) {
+      businessId = await getLocalBusinessId();
+    }
+
+    const updatedFormData = {
+      ...formData,
+      businessId,
+    };
+
+    console.log(updatedFormData);
 
     try {
-      const response = await fetch(ADD_PKG_API, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${getToken()}`,
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        packageToUpdate
+          ? `${UPDATE_PKG_API}/${packageToUpdate._id}`
+          : ADD_PKG_API,
+        {
+          method: packageToUpdate ? "PUT" : "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${getToken()}`,
+          },
+          body: JSON.stringify(updatedFormData),
+        }
+      );
 
       if (response.ok) {
-        alert("Activity added successfully!");
+        alert("Successfully saved!");
         setFormData(initPackageFormData);
+        fetchPackages();
       } else {
-        alert("Failed to add activity.");
+        alert("Failed to save package.");
       }
     } catch (error) {
       console.error("Error:", error);
@@ -93,15 +134,21 @@ const PackageForm: React.FC<Props> = ({ activitiesServer }) => {
   };
 
   const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
-    if (e.target.value === '0') {
-      e.target.value = '';
+    if (e.target.value === "0") {
+      e.target.value = "";
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 p-6 bg-white shadow-md rounded-md">
+    <form
+      onSubmit={handleSubmit}
+      className="space-y-6 p-6 bg-white border rounded-md"
+    >
       <div>
-        <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+        <label
+          htmlFor="name"
+          className="block text-sm font-medium text-gray-700"
+        >
           Package Name
         </label>
         <input
@@ -133,7 +180,10 @@ const PackageForm: React.FC<Props> = ({ activitiesServer }) => {
                 className="h-4 w-4 text-indigo-600 border-gray-300 rounded"
                 id={act._id}
               />
-              <label htmlFor={act._id} className="ml-2 block text-sm font-medium text-gray-700">
+              <label
+                htmlFor={act._id}
+                className="ml-2 block text-sm font-medium text-gray-700"
+              >
                 {act.name}
               </label>
             </div>
@@ -142,7 +192,10 @@ const PackageForm: React.FC<Props> = ({ activitiesServer }) => {
       </div>
 
       <div>
-        <label htmlFor="adultPrice" className="block text-sm font-medium text-gray-700">
+        <label
+          htmlFor="adultPrice"
+          className="block text-sm font-medium text-gray-700"
+        >
           Adult Price
         </label>
         <input
@@ -158,7 +211,10 @@ const PackageForm: React.FC<Props> = ({ activitiesServer }) => {
       </div>
 
       <div>
-        <label htmlFor="childPrice" className="block text-sm font-medium text-gray-700">
+        <label
+          htmlFor="childPrice"
+          className="block text-sm font-medium text-gray-700"
+        >
           Child Price
         </label>
         <input
@@ -174,7 +230,10 @@ const PackageForm: React.FC<Props> = ({ activitiesServer }) => {
       </div>
 
       <div>
-        <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+        <label
+          htmlFor="description"
+          className="block text-sm font-medium text-gray-700"
+        >
           Description
         </label>
         <textarea
@@ -195,7 +254,10 @@ const PackageForm: React.FC<Props> = ({ activitiesServer }) => {
           onChange={handleChange}
           className="h-4 w-4 text-indigo-600 border-gray-300 rounded"
         />
-        <label htmlFor="isActive" className="ml-2 block text-sm font-medium text-gray-700">
+        <label
+          htmlFor="isActive"
+          className="ml-2 block text-sm font-medium text-gray-700"
+        >
           Active
         </label>
       </div>
@@ -204,7 +266,7 @@ const PackageForm: React.FC<Props> = ({ activitiesServer }) => {
         type="submit"
         className="w-full py-2 px-4 bg-indigo-600 text-white font-semibold rounded-md shadow-md hover:bg-indigo-700"
       >
-        Save Package
+        {packageToUpdate ? "Update Package" : "Save Package"}
       </button>
     </form>
   );
