@@ -9,6 +9,7 @@ import Navbar from './components/navbar/Navbar';
 import DashboardIndex from './pages/home';
 import AboutPage from './pages/about';
 import ActivityIndex from './pages/activity';
+import PackageIndex from './pages/package';
 
 
 function App() {
@@ -34,6 +35,7 @@ function Main() {
             <Route path="/dashboard" element={<DashboardIndex/>} />
             <Route path="/about" element={<AboutPage/>} />
             <Route path="/activity" element={<ActivityIndex/>} />
+            <Route path="/packages" element={<PackageIndex/>} />
           </Routes>
         </ProtectedRoute>
       </main>

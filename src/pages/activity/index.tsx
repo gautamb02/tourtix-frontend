@@ -14,9 +14,9 @@ const ActivityIndex: React.FC = () => {
         <h1 className="text-3xl font-bold text-gray-800">Activitiy</h1>
         <button
           onClick={openModal}
-          className="px-4 py-2 bg-blue-500 text-white rounded"
+          className="px-4 py-2 bg-green-600 text-white rounded"
         >
-          Open Modal
+          Add Activity
         </button>
         <TicketingSystem isOpen={isModalOpen} onClose={closeModal}>
           <AddActivityForm />
