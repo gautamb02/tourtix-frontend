@@ -30,7 +30,7 @@ const LandingPage: React.FC = () => {
               { icon: 'bx bx-time-five', title: '24/7 Availability', description: 'Book tickets anytime, anywhere' },
               { icon: 'bx bx-globe', title: 'Multilingual Support', description: 'Cater to visitors from around the world' },
             ].map((feature, index) => (
-              <div key={index} className="bg-white rounded-lg shadow-lg p-6 text-center transition-transform transform hover:scale-105">
+              <div key={index+1} className="bg-white rounded-lg shadow-lg p-6 text-center transition-transform transform hover:scale-105">
                 <i className={`${feature.icon} w-12 h-12 text-indigo-600 text-5xl mb-4 mx-auto`} />
                 <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
                 <p className="text-gray-600">{feature.description}</p>
@@ -58,7 +58,7 @@ const LandingPage: React.FC = () => {
                   'Seamless payment integration',
                   'Real-time availability updates'
                 ].map((item, index) => (
-                  <li key={index} className="flex items-center">
+                  <li key={index+1} className="flex items-center">
                     <i className="bx bxs-zap w-5 h-5 text-indigo-600 mr-2" />
                     <span>{item}</span>
                   </li>

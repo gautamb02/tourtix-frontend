@@ -4,7 +4,7 @@ import axios from 'axios';
 import { SIGNUP_API } from '../../../constants';
 
 const SignUpForm: React.FC = () => {
-    const [organizationName, setName] = useState<string>('');
+    const [organizationName, setOrganizationName] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const navigate = useNavigate();
@@ -25,7 +25,7 @@ const SignUpForm: React.FC = () => {
                 {/* Logo/Image Section */}
                 <div className="flex items-center justify-center w-full md:w-1/2 p-6">
                     <img 
-                        src="https://img.freepik.com/free-vector/sign-concept-illustration_114360-5425.jpg?uid=R112876432&ga=GA1.1.2137890070.1724574592&semt=ais_hybrid" 
+                        src="/Sign-up.svg" 
                         alt="Logo" 
                         className="w-full h-auto max-h-80 object-contain" 
                     />
@@ -43,7 +43,7 @@ const SignUpForm: React.FC = () => {
                                 autoComplete='off' 
                                 name='name' 
                                 className='form-control rounded-md border border-gray-300 p-2 w-full focus:ring-indigo-500 focus:border-indigo-500' 
-                                onChange={(e) => setName(e.target.value)} 
+                                onChange={(e) => setOrganizationName(e.target.value)} 
                                 required 
                             />
                         </div>
