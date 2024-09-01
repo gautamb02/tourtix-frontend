@@ -16,8 +16,6 @@ const BusinessHoursStep: React.FC<Props> = ({
   onNext,
   onBack,
 }) => {
-  
-
   const [isButtonDisabled, setButtonDisabled] = useState(false);
 
   const handleOpenChange = (day: string, isOpen: boolean) => {
@@ -59,16 +57,16 @@ const BusinessHoursStep: React.FC<Props> = ({
   };
 
   return (
-    <div className="flex items-center justify-center">
-      <div className="w-1/2 flex">
+    <div className="flex flex-col md:flex-row items-center justify-center">
+      <div className="hidden md:w-1/2 md:block">
         <img
-          src="/whours.png"
-          alt=""
-          className="w-5/6 justify-center items center"
+          src="/whours.svg"
+          alt="Business Hours"
+          className="w-5/6 mx-auto"
         />
       </div>
-      <div className="mb-4 w-1/2">
-        <h2 className="text-xl font-bold mb-2">Business Hours</h2>
+      <div className="mb-4 w-full md:w-1/2 p-4">
+        <h2 className="text-xl text-center mb-2 font-bold mb-2">Business Hours</h2>
 
         {days.map((day) => {
           const dayHours = hours[day] || { open: false };
@@ -122,8 +120,8 @@ const BusinessHoursStep: React.FC<Props> = ({
           );
         })}
         <div className="flex justify-between mt-4">
-        <BackButton onBack={onBack}/>
-        <NextButton isButtonDisabled={isButtonDisabled} onNext={onNext}/>
+          <BackButton onBack={onBack} />
+          <NextButton isButtonDisabled={isButtonDisabled} onNext={onNext} />
         </div>
       </div>
     </div>

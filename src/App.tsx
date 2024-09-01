@@ -24,7 +24,7 @@ function Main() {
   return (
     <>
       <Navbar />
-      <main>
+      <main  >
         <ProtectedRoute>
           <Routes>
             <Route path="/" element={<LandingPageIndex />} />

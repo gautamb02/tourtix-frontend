@@ -1,5 +1,6 @@
 import { Navigate, useLocation } from 'react-router-dom';
 import { getLogged, getOnboard } from '../utils/localStorage';
+import OnboardingIndex from '../pages/onboarding';
 
 interface RouteGuardProps {
   children: React.ReactNode;
@@ -9,7 +10,8 @@ const ProtectedRoute: React.FC<RouteGuardProps> = ({ children }) => {
   const location = useLocation();
   const logged = getLogged();
   const onboarded = getOnboard();
-
+  
+  
   
   if (['/login', '/signup'].includes(location.pathname) && logged && onboarded) {
     return <Navigate to="/dashboard" replace />;

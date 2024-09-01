@@ -19,12 +19,9 @@ const BusinessInfoStep: React.FC<Props> = ({
 
   return (
     <div className="mb-4">
-      <div className="flex justify-center items-center">
-        <div className="w-1/2">
-          <img src="/business-info.png" className="w-5/6 mx-auto" />
-        </div>
-        <div className="w-1/2 p-4 mb-4">
-          <h2 className="text-xl font-bold mb-2">Business Information</h2>
+      <div className="flex flex-col-reverse md:flex-row justify-center items-center">
+        <div className="w-full md:w-1/2 p-4 mb-4">
+          <h2 className="text-xl text-center font-bold mb-2">Business Information</h2>
           <input
             type="text"
             name="businessName"
@@ -42,8 +39,11 @@ const BusinessInfoStep: React.FC<Props> = ({
             className="w-full p-2 mb-2 border rounded"
           />
           <div className="flex justify-end mt-4">
-            <NextButton isButtonDisabled={isButtonDisabled} onNext={onNext}/>
+            <NextButton isButtonDisabled={isButtonDisabled} onNext={onNext} />
           </div>
+        </div>
+        <div className="w-full md:w-1/2">
+          <img src="/Business-step.svg" className="w-5/6 mx-auto" alt="Business Info" />
         </div>
       </div>
     </div>

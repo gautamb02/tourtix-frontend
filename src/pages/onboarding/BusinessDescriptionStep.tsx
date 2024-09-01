@@ -17,17 +17,17 @@ const BusinessDescriptionStep: React.FC<Props> = ({
   onBack,
 }) => {
   const cleanedDescription = formData.description.trim().replace(/\s+/g, ' ');
-  const MIN_DESCRIPTION_LENGTH = 750;
+  const MIN_DESCRIPTION_LENGTH = 75;
   const CURRENT_DESCRIPTION_LENGTH = cleanedDescription.length;
   const isButtonDisabled = CURRENT_DESCRIPTION_LENGTH < MIN_DESCRIPTION_LENGTH;
 
   return (
-    <div className="flex justify-center items-center">
-      <div className="w-1/2">
-        <img src="/about.png" className="w-5/6 mx-auto" />
+    <div className="flex flex-col md:flex-row justify-center items-center">
+      <div className="hidden md:w-1/2 md:block">
+        <img src="/about.svg" className="w-5/6 mx-auto" alt="About" />
       </div>
-      <div className="mb-4 w-1/2">
-        <h2 className="text-xl font-bold mb-2">Business Description</h2>
+      <div className="mb-4 w-full md:w-1/2 p-4">
+        <h2 className="text-xl text-center font-bold mb-2">Business Description</h2>
         <textarea
           name="description"
           value={formData.description}
@@ -40,8 +40,8 @@ const BusinessDescriptionStep: React.FC<Props> = ({
           {CURRENT_DESCRIPTION_LENGTH}/{MIN_DESCRIPTION_LENGTH}
         </div>
         <div className="flex justify-between mt-4">
-         <BackButton onBack={onBack}/>
-          <NextButton isButtonDisabled={isButtonDisabled} onNext={onNext}/>
+          <BackButton onBack={onBack} />
+          <NextButton isButtonDisabled={isButtonDisabled} onNext={onNext} />
         </div>
       </div>
     </div>

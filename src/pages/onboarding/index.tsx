@@ -148,8 +148,8 @@ const OnboardingIndex: React.FC = () => {
 
   return (
     <>
-      <div className="flex justify-center items-center min-h-[80vh]">
-        <div className="w-5/6 mx-auto my-8 bg-white">{renderStep()}</div>
+      <div className="flex justify-center items-center   min-h-[80vh]">
+        <div className="w-5/6 mx-auto my-8 border-2 p-2  rounded-2xl bg-gray-10 ">{renderStep()}</div>
       </div>
     </>
   );
