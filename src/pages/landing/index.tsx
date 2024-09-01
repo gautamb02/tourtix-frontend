@@ -1,5 +1,4 @@
 import React from 'react';
-import { ChevronRight, MessageCircle, Clock, Globe, Zap } from 'lucide-react';
 
 const LandingPage: React.FC = () => {
   return (
@@ -15,7 +14,7 @@ const LandingPage: React.FC = () => {
           </p>
           <div className="flex justify-center space-x-4">
             <button className="bg-indigo-600 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-indigo-700 transition duration-300 shadow-lg flex items-center transform hover:scale-105">
-              Get Started <ChevronRight className="ml-2" size={20} />
+              Get Started <i className='text-3xl bx bx-chevron-right'></i>
             </button>
             <button className="bg-white text-indigo-600 px-8 py-3 rounded-full text-lg font-semibold hover:bg-indigo-100 transition duration-300 shadow-lg transform hover:scale-105">
               Watch Demo
@@ -27,12 +26,12 @@ const LandingPage: React.FC = () => {
           <h2 className="text-4xl font-bold text-center text-indigo-800 mb-10">Features</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { icon: MessageCircle, title: 'AI-Powered Chatbot', description: 'Intelligent conversations for quick bookings' },
-              { icon: Clock, title: '24/7 Availability', description: 'Book tickets anytime, anywhere' },
-              { icon: Globe, title: 'Multilingual Support', description: 'Cater to visitors from around the world' },
+              { icon: 'bx bx-message-rounded-dots', title: 'AI-Powered Chatbot', description: 'Intelligent conversations for quick bookings' },
+              { icon: 'bx bx-time-five', title: '24/7 Availability', description: 'Book tickets anytime, anywhere' },
+              { icon: 'bx bx-globe', title: 'Multilingual Support', description: 'Cater to visitors from around the world' },
             ].map((feature, index) => (
               <div key={index} className="bg-white rounded-lg shadow-lg p-6 text-center transition-transform transform hover:scale-105">
-                <feature.icon className="w-12 h-12 text-indigo-600 mb-4 mx-auto" />
+                <i className={`${feature.icon} w-12 h-12 text-indigo-600 text-5xl mb-4 mx-auto`} />
                 <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
                 <p className="text-gray-600">{feature.description}</p>
               </div>
@@ -60,7 +59,7 @@ const LandingPage: React.FC = () => {
                   'Real-time availability updates'
                 ].map((item, index) => (
                   <li key={index} className="flex items-center">
-                    <Zap className="w-5 h-5 text-indigo-600 mr-2" />
+                    <i className="bx bxs-zap w-5 h-5 text-indigo-600 mr-2" />
                     <span>{item}</span>
                   </li>
                 ))}
