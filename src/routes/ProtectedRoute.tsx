@@ -9,7 +9,8 @@ const ProtectedRoute: React.FC<RouteGuardProps> = ({ children }) => {
   const location = useLocation();
   const logged = getLogged();
   const onboarded = getOnboard();
-
+  
+  
   
   if (['/login', '/signup'].includes(location.pathname) && logged && onboarded) {
     return <Navigate to="/dashboard" replace />;
