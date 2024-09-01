@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Logout from "./Logout";
+import { getLogged } from "../../utils/localStorage";
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -8,13 +9,21 @@ const Navbar: React.FC = () => {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const location = useLocation();
   const curr_path = location.pathname;
-  const links = [
-    { name: "Home", path: "/" },
-    { name: "About", path: "/about" },
-    { name: "Dashboard", path: "/dashboard" },
-    { name: "Activity", path: "/activity" },
-    { name: "Package", path: "/packages" },
-  ];
+
+  const logged = getLogged();
+  const links = logged
+    ? [
+        { name: "Home", path: "/" },
+        { name: "About", path: "/about" },
+        { name: "Dashboard", path: "/dashboard" },
+        { name: "Activity", path: "/activity" },
+        { name: "Package", path: "/packages" },
+      ]
+    : [
+        { name: "Home", path: "/" },
+        { name: "About", path: "/about" },
+        { name: "Login", path: "/login" },
+      ];
 
   return (
     <nav className="bg-white border-b shadow-md mb-2 text-black p-4">
@@ -22,22 +31,24 @@ const Navbar: React.FC = () => {
         <div className="text-indigo-800 text-4xl font-bold">
           <Link to="/">TourTix</Link>
         </div>
-        <div className="hidden md:flex space-x-6">
+        <div className="hidden md:flex items-center space-x-6">
           {links.map((link) => {
             return (
               <Link
                 key={link.path}
                 to={link.path}
                 className={`${
-                  curr_path === link.path ? "text-indigo-600 font-semibold" : "text-black"
-                } mt-2 hover:text-indigo-600 transition duration-300`}
+                  curr_path === link.path
+                    ? "text-indigo-600 font-semibold"
+                    : "text-black"
+                } mt-2 hover:text-indigo-600  transition duration-300 ${link.path === '/login' ? 'bg-green-700 hover:text-white hover:font-semibold text-white p-1 px-4 rounded' :''}`}
               >
                 {link.name}
               </Link>
             );
           })}
 
-          <Logout />
+          {logged && <Logout />}
         </div>
         <div className="md:hidden flex items-center">
           <button
@@ -80,7 +91,7 @@ const Navbar: React.FC = () => {
             );
           })}
 
-          <Logout />
+          {logged && <Logout />}
         </div>
       </div>
     </nav>
