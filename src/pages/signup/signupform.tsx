@@ -4,7 +4,7 @@ import axios from 'axios';
 import { SIGNUP_API } from '../../../constants';
 
 const SignUpForm: React.FC = () => {
-    const [organizationName, setName] = useState<string>('');
+    const [organizationName, setOrganizationName] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const navigate = useNavigate();
@@ -43,7 +43,7 @@ const SignUpForm: React.FC = () => {
                                 autoComplete='off' 
                                 name='name' 
                                 className='form-control rounded-md border border-gray-300 p-2 w-full focus:ring-indigo-500 focus:border-indigo-500' 
-                                onChange={(e) => setName(e.target.value)} 
+                                onChange={(e) => setOrganizationName(e.target.value)} 
                                 required 
                             />
                         </div>

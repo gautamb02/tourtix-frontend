@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const AboutPage: React.FC = () => {
   const features = [
@@ -37,12 +38,12 @@ const AboutPage: React.FC = () => {
               <p className="mt-4 text-lg leading-6 text-indigo-500">
                 Our chatbot ticketing system offers a seamless, efficient, and intelligent solution for museums of all sizes. From gate entry to show bookings, we've got you covered.
               </p>
-              <a
-                href="#"
+              <Link
+                to="#"
                 className="mt-8 bg-indigo-500 border border-transparent rounded-md shadow px-5 py-3 inline-flex items-center text-base font-medium text-white hover:bg-indigo-700"
               >
                 Get Started
-              </a>
+              </Link>
             </div>
           </div>
           
@@ -75,8 +76,8 @@ const AboutPage: React.FC = () => {
             <h2 className="text-3xl mb-4 font-extrabold text-indigo-900 text-center">Key Benefits</h2>
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
 
-            {features.map((feature, index) => (
-              <div key={index} className="pt-6">
+            {features.map((feature, idx) => (
+              <div key={idx+1} className="pt-6">
                 <div className="flow-root bg-white rounded-lg px-6 pb-8">
                   <div className="-mt-6">
                     <div>
