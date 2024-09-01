@@ -11,7 +11,7 @@ const NextButton :React.FC<Props>  = ({isButtonDisabled,onNext}) => {
       <button
               disabled={isButtonDisabled}
               onClick={onNext}
-              className={`font-bold py-2 px-4 rounded text-white ${isButtonDisabled ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-700'}`}
+              className={`font-bold py-2 px-4 rounded text-white ${isButtonDisabled ? 'bg-gray-400 cursor-not-allowed' : 'bg-indigo-500 hover:bg-blue-700'}`}
               >
               Next
             </button>

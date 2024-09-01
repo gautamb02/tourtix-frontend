@@ -9,7 +9,7 @@ const BackButton :React.FC<Props>= ({onBack}) => {
     <div>
        <button
             onClick={onBack}
-            className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded"
+            className="bg-gray-100 hover:bg-gray-500 hover:text-white border text-gray-800 font-bold py-2 px-4 rounded"
           >
             Back
           </button>

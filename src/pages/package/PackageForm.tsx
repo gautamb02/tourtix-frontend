@@ -65,16 +65,12 @@ const PackageForm: React.FC<Props> = ({ activitiesServer }) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if(!(formData.activities.length>0)){
-      alert("kindly select one or more activities")
+    if (!(formData.activities.length > 0)) {
+      alert("Kindly select one or more activities");
       return;
     }
     setFormData({ ...formData, businessId: getLocalBusinessId() });
 
-
-    // console.log(formData);
-
-    
     try {
       const response = await fetch(ADD_PKG_API, {
         method: "POST",
@@ -87,12 +83,18 @@ const PackageForm: React.FC<Props> = ({ activitiesServer }) => {
 
       if (response.ok) {
         alert("Activity added successfully!");
-        setFormData(initPackageFormData)
+        setFormData(initPackageFormData);
       } else {
         alert("Failed to add activity.");
       }
     } catch (error) {
       console.error("Error:", error);
+    }
+  };
+
+  const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+    if (e.target.value === '0') {
+      e.target.value = '';
     }
   };
 
@@ -115,27 +117,27 @@ const PackageForm: React.FC<Props> = ({ activitiesServer }) => {
       </div>
 
       <div className="grid grid-cols-4 gap-4">
-        {activitiesServer.map((act)=>{
+        {activitiesServer.map((act) => {
           return (
             <div
-            key={act._id}
-            className="flex bg-gray-100 p-2 rounded-md items-center cursor-pointer"
-            onClick={() => handleDivClick(act._id)}
-          >
-            <input
-              type="checkbox"
-              name="activity"
-              value={act._id}
-              checked={formData.activities.includes(act._id)}
-              onChange={handleChange}
-              className="h-4 w-4 text-indigo-600 border-gray-300 rounded"
-              id={act._id}
-            />
-            <label htmlFor={act._id} className="ml-2 block text-sm font-medium text-gray-700">
-              {act.name}
-            </label>
-          </div>
-          )
+              key={act._id}
+              className="flex bg-gray-100 p-2 rounded-md items-center cursor-pointer"
+              onClick={() => handleDivClick(act._id)}
+            >
+              <input
+                type="checkbox"
+                name="activity"
+                value={act._id}
+                checked={formData.activities.includes(act._id)}
+                onChange={handleChange}
+                className="h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                id={act._id}
+              />
+              <label htmlFor={act._id} className="ml-2 block text-sm font-medium text-gray-700">
+                {act.name}
+              </label>
+            </div>
+          );
         })}
       </div>
 
@@ -149,6 +151,7 @@ const PackageForm: React.FC<Props> = ({ activitiesServer }) => {
           id="adultPrice"
           value={formData.adultPrice}
           onChange={handleChange}
+          onFocus={handleFocus}
           required
           className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
         />
@@ -164,6 +167,7 @@ const PackageForm: React.FC<Props> = ({ activitiesServer }) => {
           id="childPrice"
           value={formData.childPrice}
           onChange={handleChange}
+          onFocus={handleFocus}
           required
           className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
         />

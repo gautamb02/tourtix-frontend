@@ -7,7 +7,7 @@ import BackButton from "../../components/onboarding/BackButton";
 
 interface Props {
   formData: FormData;
-  handleGeoLocationChange: (geolocation : GeoLocationData) => void;
+  handleGeoLocationChange: (geolocation: GeoLocationData) => void;
   onNext: () => void;
   onBack: () => void;
 }
@@ -18,7 +18,7 @@ const BusinessGeoLocationStep: React.FC<Props> = ({
   onNext,
   onBack,
 }) => {
-  const isButtonDisabled = formData.geolocation.lat == 0
+  const isButtonDisabled = formData.geolocation.lat === 0;
   const mapRef = useRef<HTMLDivElement | null>(null);
   const mapInstance = useRef<L.Map | null>(null);
   const markerRef = useRef<L.Marker | null>(null); // Ref to handle marker
@@ -71,7 +71,7 @@ const BusinessGeoLocationStep: React.FC<Props> = ({
         (position) => {
           const { latitude, longitude } = position.coords;
           setCoordinates({ lat: latitude, lng: longitude });
-          handleGeoLocationChange({ lat: latitude, lng: longitude })
+          handleGeoLocationChange({ lat: latitude, lng: longitude });
         },
         (error) => {
           console.error("Error getting location: ", error);
@@ -100,21 +100,20 @@ const BusinessGeoLocationStep: React.FC<Props> = ({
   }, []);
 
   return (
-    <div className="flex justify-center items-center">
-      <div className="w-1/2">
-        <img src="/location.png" className="w-5/6 mx-auto" alt="Contact" />
+    <div className="flex flex-col md:flex-row justify-center items-center">
+      <div className="hidden md:block md:w-1/2">
+        <img src="/location.svg" className="w-5/6 mx-auto" alt="Contact" />
       </div>
-      <div className="w-1/2 h-full">
+      <div className="w-full md:w-1/2 h-full">
         <div
           ref={mapRef} // Attach the ref to the map container
           style={{ height: "500px", width: "100%" }} // Ensure the map container has size
         ></div>
 
-        <div className="flex justify-between">
+        <div className="flex justify-between mt-4">
           <div className="mt-4">
             {coordinates && (
               <>
-                {" "}
                 <h3 className="text-lg font-semibold">Selected Location:</h3>
                 <p>Latitude: {coordinates.lat.toFixed(6)}</p>
                 <p>Longitude: {coordinates.lng.toFixed(6)}</p>
@@ -122,7 +121,7 @@ const BusinessGeoLocationStep: React.FC<Props> = ({
             )}
           </div>
           <div>
-            <button 
+            <button
               onClick={locateMe}
               className="mb-4 px-4 py-2 bg-blue-500 text-white rounded"
             >
@@ -132,8 +131,8 @@ const BusinessGeoLocationStep: React.FC<Props> = ({
         </div>
 
         <div className="flex justify-between mt-4">
-        <BackButton onBack={onBack}/>
-        <NextButton isButtonDisabled={isButtonDisabled} onNext={onNext}/>
+          <BackButton onBack={onBack} />
+          <NextButton isButtonDisabled={isButtonDisabled} onNext={onNext} />
         </div>
       </div>
     </div>

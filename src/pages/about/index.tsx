@@ -47,7 +47,7 @@ const AboutPage: React.FC = () => {
             </div>
           </div>
           
-          <div className="flex space-x-4 justify-center items-center ">
+          <div className="flex space-x-4 justify-center items-center overflow-x-auto overflow-scroll ">
 
           <img
               className="object-cover h-96 rounded-3xl "

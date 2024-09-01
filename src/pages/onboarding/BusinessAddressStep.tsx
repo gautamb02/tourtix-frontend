@@ -25,12 +25,12 @@ const BusinessAddressStep: React.FC<Props> = ({
     !formData.pincode.trim();
 
   return (
-    <div className="flex justify-center items-center">
-      <div className="w-1/2">
-        <img src="/address.png" className="w-5/6 mx-auto" />
+    <div className="flex flex-col md:flex-row justify-center items-center">
+      <div className="hidden md:w-1/2 md:block">
+        <img src="/address.svg" className="w-5/6 mx-auto" alt="Address" />
       </div>
-      <div className="mb-4 w-1/2">
-        <h2 className="text-xl font-bold mb-2">Business Address</h2>
+      <div className="mb-4 w-full md:w-1/2 p-4">
+        <h2 className="text-xl text-center font-bold mb-2">Business Address</h2>
         <input
           type="text"
           name="address"
@@ -72,8 +72,8 @@ const BusinessAddressStep: React.FC<Props> = ({
           className="w-full p-2 mb-2 border rounded"
         />
         <div className="flex justify-between mt-4">
-        <BackButton onBack={onBack}/>
-        <NextButton isButtonDisabled={isButtonDisabled} onNext={onNext}/>
+          <BackButton onBack={onBack} />
+          <NextButton isButtonDisabled={isButtonDisabled} onNext={onNext} />
         </div>
       </div>
     </div>

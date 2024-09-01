@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const LandingPage: React.FC = () => {
   return (
@@ -13,12 +14,12 @@ const LandingPage: React.FC = () => {
             AI-Powered Chatbot for Seamless Museum Experiences
           </p>
           <div className="flex justify-center space-x-4">
-            <button className="bg-indigo-600 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-indigo-700 transition duration-300 shadow-lg flex items-center transform hover:scale-105">
+            <Link to='/login' className="bg-indigo-600 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-indigo-700 transition duration-300 shadow-lg flex items-center transform hover:scale-105">
               Get Started <i className='text-3xl bx bx-chevron-right'></i>
-            </button>
-            <button className="bg-white text-indigo-600 px-8 py-3 rounded-full text-lg font-semibold hover:bg-indigo-100 transition duration-300 shadow-lg transform hover:scale-105">
+            </Link>
+            <a  href='https://www.youtube.com/watch?v=REVOB6xbHJg' target='_blank' className="bg-white text-indigo-600 px-8 py-3 rounded-full text-lg font-semibold hover:bg-indigo-100 transition duration-300 shadow-lg transform hover:scale-105">
               Watch Demo
-            </button>
+            </a>
           </div>
         </section>
 
@@ -30,7 +31,7 @@ const LandingPage: React.FC = () => {
               { icon: 'bx bx-time-five', title: '24/7 Availability', description: 'Book tickets anytime, anywhere' },
               { icon: 'bx bx-globe', title: 'Multilingual Support', description: 'Cater to visitors from around the world' },
             ].map((feature, index) => (
-              <div key={index+1} className="bg-white rounded-lg shadow-lg p-6 text-center transition-transform transform hover:scale-105">
+              <div key={index + 1} className="bg-white rounded-lg shadow-lg p-6 text-center transition-transform transform hover:scale-105">
                 <i className={`${feature.icon} w-12 h-12 text-indigo-600 text-5xl mb-4 mx-auto`} />
                 <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
                 <p className="text-gray-600">{feature.description}</p>
@@ -43,11 +44,17 @@ const LandingPage: React.FC = () => {
           <h2 className="text-4xl font-bold text-center text-indigo-800 mb-10">See TourTix in Action</h2>
           <div className="bg-white rounded-lg shadow-lg p-8 flex flex-col md:flex-row items-center">
             <div className="md:w-1/2 mb-8 md:mb-0">
-              <img 
-                src="/api/placeholder/600/400"
-                alt="TourTix Demo" 
-                className="rounded-lg shadow-md"
-              />
+              <div className="relative w-full" style={{ paddingTop: '56.25%' }}> {/* 16:9 Aspect Ratio */}
+                <iframe
+                  className="absolute top-0 left-0 w-full h-full"
+                  src="https://www.youtube.com/embed/REVOB6xbHJg?si=LZQgKrDRtSMztqgo"
+                  title="YouTube video player"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                ></iframe>
+              </div>
             </div>
             <div className="md:w-1/2 md:pl-8">
               <h3 className="text-2xl font-semibold mb-4">Effortless Booking Process</h3>
@@ -58,7 +65,7 @@ const LandingPage: React.FC = () => {
                   'Seamless payment integration',
                   'Real-time availability updates'
                 ].map((item, index) => (
-                  <li key={index+1} className="flex items-center">
+                  <li key={index + 1} className="flex items-center">
                     <i className="bx bxs-zap w-5 h-5 text-indigo-600 mr-2" />
                     <span>{item}</span>
                   </li>
