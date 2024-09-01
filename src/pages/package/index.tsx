@@ -3,7 +3,7 @@ import PackageModal from "./PackageModal";
 import PackageForm from "./PackageForm";
 import { getLocalBusinessId, getToken } from "../../utils/localStorage";
 import { GET_ACTIVITIES_API } from "../../../constants";
-import { ActivityState } from "./types";
+import { ActivityState, Package } from "./types";
 import GetPackages from "./GetPackages";
 
 const PackageIndex: React.FC = () => {
@@ -13,6 +13,12 @@ const PackageIndex: React.FC = () => {
 
   const [activities, setActivities] = useState<ActivityState[]>([] );
   const [loading, setLoading] = useState(false);
+
+  const [packageToUpdate, setPackageToUpdate] = useState<Package|null>(null);
+  const funcToSetUpdatePackage =( pkg : Package)=>{
+    setPackageToUpdate(pkg)
+    openModal();
+  }
   
   useEffect(() => {
     const fetchActivities = async () => {
@@ -63,7 +69,7 @@ const PackageIndex: React.FC = () => {
           <PackageForm activitiesServer={activities}  />
         </PackageModal>
       </div>
-      <GetPackages />
+      <GetPackages funcToSetUpdatePackage={funcToSetUpdatePackage} />
     </div>
   );
 };

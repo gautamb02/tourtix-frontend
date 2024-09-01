@@ -3,9 +3,10 @@ import { Package } from './types'
 
 interface Props {
     packageData : Package,
+    funcToSetUpdatePackage: (pkg: Package)=>void;
 }
 
-const PackageCard :React.FC<Props> = ({packageData}) => {
+const PackageCard :React.FC<Props> = ({packageData,funcToSetUpdatePackage}) => {
   return (
     <div className=" rounded-lg p-4 my-2 border bg-white">
       <h2 className="text-xl font-bold">{packageData.name}</h2>

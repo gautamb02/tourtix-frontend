@@ -20,6 +20,7 @@ export const initPackageFormData = {
 };
 
 export interface TimeSlot {
+  _id : string | null;
   startTime: string;
   endTime: string;
   hasSeatLimit: boolean;
@@ -34,13 +35,6 @@ export interface ActivityState {
   description?: string;
   availableTimeSlots: TimeSlot[];
 }
-
-export const initialTimeSlot: TimeSlot = {
-  startTime: "",
-  endTime: "",
-  hasSeatLimit: false,
-  availableSeats: undefined,
-};
 
 
 export interface Package {

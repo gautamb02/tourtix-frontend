@@ -4,7 +4,11 @@ import { getLocalBusinessId, getToken } from "../../utils/localStorage";
 import { GET_PKGS_API } from "../../../constants";
 import PackageCard from "./PackageCard";
 
-const GetPackages: React.FC = () => {
+interface Props{
+  funcToSetUpdatePackage: (pkg: Package)=>void;
+}
+
+const GetPackages: React.FC<Props> = ({funcToSetUpdatePackage}) => {
   // Component implementation here
 
   const [packages, setPackages] = useState<Package[]>([]);
@@ -36,8 +40,7 @@ const GetPackages: React.FC = () => {
     };
 
     fetchPackages();
-  });
-
+  },[]);
   return (
     <div>
       {/* Render activitiesServer and packages */}
