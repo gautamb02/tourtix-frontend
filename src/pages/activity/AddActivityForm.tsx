@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ActivityFormState, initialState, initialTimeSlot } from "./types";
 import { ADD_ACTIVITY_API } from "../../../constants";
-import { getToken } from "../../utils/localStorage";
+import { getLocalBusinessId, getToken } from "../../utils/localStorage";
 
 const AddActivityForm = () => {
   const [activityFormData, setActivityFormData] =
@@ -81,7 +81,7 @@ const AddActivityForm = () => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${getToken()}`,
         },
-        body: JSON.stringify(activityFormData),
+        body: JSON.stringify({...activityFormData , businessId : getLocalBusinessId()}),
       });
 
       if (response.ok) {
