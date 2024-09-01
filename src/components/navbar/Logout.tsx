@@ -9,8 +9,8 @@ const Logout: React.FC = () => {
     // Clear user data from local storage
     clearUserData();
     
-    // Optionally, you could also handle other logout-related tasks here
-    
+    // Optionally, handle other logout-related tasks here
+
     // Redirect to the home page or login page
     navigate('/');
   };
@@ -18,7 +18,7 @@ const Logout: React.FC = () => {
   return (
     <button 
       onClick={handleLogout} 
-      className="text-black bg-red-700 hover:text-gray-300"
+      className="text-white bg-red-500 rounded-lg px-2 py-2 hover:bg-red-600 transition duration-300"
     >
       Logout
     </button>
