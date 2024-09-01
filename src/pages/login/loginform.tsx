@@ -37,7 +37,7 @@ const LoginForm: React.FC = () => {
         {/* Logo/Image Section */}
         <div className="flex items-center justify-center w-full md:w-1/2 p-6">
           <img 
-            src="https://img.freepik.com/free-vector/mobile-login-concept-illustration_114360-83.jpg?uid=R112876432&ga=GA1.1.2137890070.1724574592&semt=ais_hybrid" 
+            src="/login-svg.svg" 
             alt="Logo" 
             className="w-full h-auto max-h-80 object-contain" 
           />
