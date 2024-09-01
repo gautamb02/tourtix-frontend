@@ -1,6 +1,5 @@
 import { Navigate, useLocation } from 'react-router-dom';
 import { getLogged, getOnboard } from '../utils/localStorage';
-import OnboardingIndex from '../pages/onboarding';
 
 interface RouteGuardProps {
   children: React.ReactNode;
