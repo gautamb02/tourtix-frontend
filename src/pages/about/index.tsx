@@ -1,3 +1,66 @@
+// import React from 'react';
+
+// const AboutPage: React.FC = () => {
+//   return (
+//     <div className="bg-lavender-50 min-h-screen">
+//       <div className="container mx-auto p-6">
+//         <h1 className="text-4xl font-bold text-center mb-8 text-purple-800">About Our Chatbot Ticketing System</h1>
+//         <p className="text-xl text-center mb-10 text-purple-700 max-w-3xl mx-auto">
+//           Our innovative chatbot-based ticketing system is designed to enhance the visitor experience at museums by streamlining the ticket booking process.
+//         </p>
+
+//         <div className="mb-5 text-center bg-purple-100 rounded-lg p-8 shadow-lg">
+//           <h2 className="text-3xl font-semibold mb-6 text-purple-800">Join Us in Revolutionizing Museum Visits!</h2>
+//           <p className="text-xl text-purple-700 max-w-2xl mx-auto">
+//             Experience the future of ticket booking with our chatbot solution. Say goodbye to long queues and hello to convenience!
+//           </p>
+//           <button className="mt-8 bg-purple-600 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-purple-700 transition-colors duration-300">
+//             Learn More
+//           </button>
+//         </div>
+//         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+//           <div className="bg-white shadow-lg rounded-lg p-8 border-t-4 border-purple-500 transform hover:scale-105 transition-transform duration-300">
+//             <h2 className="text-2xl font-semibold mb-6 text-purple-700">Key Benefits</h2>
+//             <ul className="space-y-4">
+//               {[
+//                 { icon: 'bx-smile', text: 'Improved Customer Service' },
+//                 { icon: 'bx-smile', text: 'Efficient Handling of High Volumes' },
+//                 { icon: 'bx-wallet', text: 'Cost-Effective Solution' },
+//                 { icon: 'bx-data', text: 'Data Collection and Analysis' },
+//                 { icon: 'bx-accessibility', text: 'Accessibility' },
+//                 { icon: 'bx-error-circle', text: 'Reduced Human Error' },
+//                 { icon: 'bx-globe', text: 'Multilingual Support' },
+//                 { icon: 'bx-store-alt', text: 'Enhanced Marketing and Promotion' },
+//               ].map((item, index) => (
+//                 <li key={index} className="flex items-center">
+//                   <i className={`bx ${item.icon} mr-3 text-purple-500 text-xl`}></i>
+//                   <span className="text-purple-800">{item.text}</span>
+//                 </li>
+//               ))}
+//             </ul>
+//           </div>
+
+//           <div className="bg-white shadow-lg rounded-lg p-8 border-t-4 border-purple-500 transform hover:scale-105 transition-transform duration-300">
+//             <h2 className="text-2xl font-semibold mb-6 text-purple-700">Our Solution</h2>
+//             <p className="mb-6 text-purple-800 leading-relaxed">
+//               Our chatbot provides a seamless ticket booking experience, allowing visitors to easily book tickets for gate entry and shows without the need for human intervention.
+//             </p>
+//             <p className="text-purple-800 leading-relaxed">
+//               With an integrated payment gateway, users can complete their transactions securely and efficiently. Our system also offers analytics to help museums make informed decisions.
+//             </p>
+//           </div>
+//         </div>
+
+        
+//       </div>
+      
+//     </div>
+//   );
+// };
+
+// export default AboutPage;
+
+
 
 import React from 'react';
 
@@ -38,7 +101,7 @@ const AboutPage: React.FC = () => {
                 Our chatbot ticketing system offers a seamless, efficient, and intelligent solution for museums of all sizes. From gate entry to show bookings, we've got you covered.
               </p>
               <a
-                href="/about"
+                href="#"
                 className="mt-8 bg-purple-500 border border-transparent rounded-md shadow px-5 py-3 inline-flex items-center text-base font-medium text-white hover:bg-indigo-700"
               >
                 Get Started

@@ -8,17 +8,18 @@ const Navbar: React.FC = () => {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
-    <nav className="bg-white border-b shadow-md  text-black p-4">
+    <nav className="bg-white border shadow-md mb-2 text-black p-4">
       <div className="container mx-auto flex justify-between items-center">
-        <div className="text-indigo-600 text-2xl font-bold">
+        <div className="text-black text-2xl font-bold">
           <Link to="/">TourTix</Link>
         </div>
-        <div className="hidden  md:flex space-x-6">
-          <Link to="/" className="text-black mt-2 hover:text-indigo-600 transition duration-300">Home</Link>
-          <Link to="/about" className="text-black mt-2 hover:text-indigo-600 transition duration-300">About</Link>
-          <Link to="/dashboard" className="text-black mt-2 hover:text-indigo-600 transition duration-300">Dashboard</Link>
-          <Link to="/activity" className="text-black mt-2 hover:text-indigo-600 transition duration-300">Activity</Link>
-          <Logout />
+        <div className="hidden md:flex space-x-4">
+          <Link to="/" className="text-black hover:text-gray-300">Home</Link>
+          <Link to="/about" className="text-black hover:text-gray-300">About</Link>
+          <Link to="/dashboard" className="text-black hover:text-gray-300">Dashboard</Link>
+          <Link to="/activity" className="text-black hover:text-gray-300">Activity</Link>
+          <Logout /> 
+          {/* Add more links as needed */}
         </div>
         <div className="md:hidden flex items-center">
           <button onClick={toggleMenu} className="text-black focus:outline-none">
@@ -34,37 +35,36 @@ const Navbar: React.FC = () => {
           </button>
         </div>
       </div>
-      <div className={`md:hidden ${isMenuOpen ? 'block' : 'hidden'} absolute top-16 right-0 w-full bg-white shadow-lg`}>
+      <div className={`md:hidden ${isMenuOpen ? 'block' : 'hidden'} absolute top-16 right-0 w-full bg-white`}>
         <div className="flex flex-col items-center p-4">
           <Link
             to="/"
-            className="text-black py-2 px-4 w-full text-center hover:bg-indigo-100 transition duration-300"
+            className="text-black py-2 px-4  w-full text-center"
             onClick={toggleMenu}
           >
             Home
           </Link>
           <Link
             to="/about"
-            className="text-black py-2 px-4 w-full text-center hover:bg-indigo-100 transition duration-300"
+            className="text-black py-2 px-4  w-full text-center"
             onClick={toggleMenu}
           >
             About
-          </Link>
-          <Link
+          </Link><Link
             to="/dashboard"
-            className="text-black py-2 px-4 w-full text-center hover:bg-indigo-100 transition duration-300"
+            className="text-black py-2 px-4  w-full text-center"
             onClick={toggleMenu}
           >
             Dashboard
-          </Link>
-          <Link
+          </Link> <Link
             to="/activity"
-            className="text-black py-2 px-4 w-full text-center hover:bg-indigo-100 transition duration-300"
+            className="text-black py-2 px-4  w-full text-center"
             onClick={toggleMenu}
           >
             Activity
           </Link>
-          <Logout />
+          <Logout /> 
+          {/* Add more links as needed */}
         </div>
       </div>
     </nav>
