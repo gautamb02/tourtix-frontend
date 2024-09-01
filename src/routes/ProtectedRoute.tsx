@@ -16,7 +16,7 @@ const ProtectedRoute: React.FC<RouteGuardProps> = ({ children }) => {
   }
   
   // Redirect to landing page if not logged in and trying to access other routes
-  if (location.pathname !== '/login' && location.pathname !== '/signup' && location.pathname !== '/' && !logged) {
+  if (location.pathname !== '/login' && location.pathname !== '/signup' && location.pathname !== '/' && location.pathname !== '/about'  && !logged) {
     return <Navigate to="/" replace />;
   } 
   

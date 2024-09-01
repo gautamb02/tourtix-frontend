@@ -35,7 +35,7 @@ function Main() {
             <Route path="/dashboard" element={<DashboardIndex/>} />
             <Route path="/about" element={<AboutPage/>} />
             <Route path="/activity" element={<ActivityIndex/>} />
-            <Route path="/package" element={<PackageIndex/>} />
+            <Route path="/packages" element={<PackageIndex/>} />
           </Routes>
         </ProtectedRoute>
       </main>
